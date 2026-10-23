@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anunay Sinha · Data Science & AI</title>
+  <meta name="description" content="Anunay Sinha — Data Science & AI professional. IIT Mandi MBA (DS & AI), IIT Madras BS, ex-Deloitte USI, Samsung, DRDO. Builds ML systems that ship into enterprise software.">
+  <meta name="author" content="Anunay Sinha">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Anunay Sinha · Data Science & AI">
+  <meta property="og:description" content="ML, NLP and AI automation in production — 90% less manual log monitoring at Deloitte, published TTS research at Samsung. IIT Mandi · IIT Madras.">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#2a78d6">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232a78d6'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-weight='700' font-size='28' fill='white'%3EAS%3C/text%3E%3C/svg%3E">
+
+  <script>
+    // Apply saved / OS theme before first paint to avoid a flash
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('as-theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') {
+        t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-bs-theme', t);
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    :root,
+    [data-bs-theme="light"] {
+      --bg: #f7f7f5;
+      --surface: #ffffff;
+      --surface-2: #f1f1ee;
+      --border: #e4e3de;
+      --ink: #0b0b0b;
+      --ink-2: #52514e;
+      --ink-3: #7a7974;
+      --accent: #2a78d6;
+      --accent-soft: rgba(42, 120, 214, .10);
+      --accent-ink: #1d5fae;
+      --work: #2a78d6;
+      --edu: #eb6834;
+      --good: #138a52;
+      --grid: #ebeae6;
+      --shadow: 0 1px 2px rgba(16, 16, 15, .04), 0 8px 24px rgba(16, 16, 15, .06);
+      --hero-glow: radial-gradient(60% 60% at 15% 10%, rgba(42,120,214,.14), transparent 70%),
+                   radial-gradient(50% 50% at 95% 20%, rgba(235,104,52,.10), transparent 70%);
+    }
+    [data-bs-theme="dark"] {
+      --bg: #121211;
+      --surface: #1a1a19;
+      --surface-2: #232321;
+      --border: #2f2f2c;
+      --ink: #f0efec;
+      --ink-2: #c3c2b7;
+      --ink-3: #94938b;
+      --accent: #3987e5;
+      --accent-soft: rgba(57, 135, 229, .16);
+      --accent-ink: #8ab8f0;
+      --work: #3987e5;
+      --edu: #d95926;
+      --good: #3fbf7f;
+      --grid: #2a2a28;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+      --hero-glow: radial-gradient(60% 60% at 15% 10%, rgba(57,135,229,.20), transparent 70%),
+                   radial-gradient(50% 50% at 95% 20%, rgba(217,89,38,.12), transparent 70%);
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    [v-cloak] { display: none; }
+    .mono { font-family: "JetBrains Mono", ui-monospace, monospace; letter-spacing: .02em; }
+    .text-2 { color: var(--ink-2) !important; }
+    .text-3 { color: var(--ink-3) !important; }
+    a { color: var(--accent-ink); }
+
+    /* ---------- Nav ---------- */
+    .site-nav {
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      backdrop-filter: saturate(160%) blur(12px);
+      -webkit-backdrop-filter: saturate(160%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 10px;
+      display: inline-grid; place-items: center;
+      background: var(--accent); color: #fff; font-weight: 800; font-size: .85rem;
+    }
+    .site-nav .nav-link { color: var(--ink-2); font-weight: 500; font-size: .92rem; border-radius: 8px; padding: .4rem .7rem !important; }
+    .site-nav .nav-link:hover { color: var(--ink); }
+    .site-nav .nav-link.active { color: var(--accent-ink); background: var(--accent-soft); }
+    .icon-btn {
+      width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--ink); display: inline-grid; place-items: center;
+    }
+    .icon-btn:hover { border-color: var(--accent); color: var(--accent-ink); }
+
+    /* ---------- Buttons ---------- */
+    .btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .btn-accent:hover, .btn-accent:focus { background: var(--accent-ink); border-color: var(--accent-ink); color: #fff; }
+    [data-bs-theme="dark"] .btn-accent:hover { background: #2a78d6; border-color: #2a78d6; }
+    .btn-ghost { border: 1px solid var(--border); background: var(--surface); color: var(--ink); font-weight: 600; }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent-ink); background: var(--surface); }
+
+    /* ---------- Cards ---------- */
+    .card-x {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .lift { transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+    .lift:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; padding: 120px 0 56px; background: var(--hero-glow); }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 44px 44px; opacity: .55;
+      mask-image: radial-gradient(70% 70% at 30% 20%, #000 20%, transparent 75%);
+      -webkit-mask-image: radial-gradient(70% 70% at 30% 20%, #000 20%, transparent 75%);
+    }
+    .hero > .container { position: relative; }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .8rem .35rem .6rem;
+      border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: .85rem; color: var(--ink-2); font-weight: 500;
+    }
+    .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 0 rgba(19,138,82,.5); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(19,138,82,.45);} 70% { box-shadow: 0 0 0 9px rgba(19,138,82,0);} 100% { box-shadow: 0 0 0 0 rgba(19,138,82,0);} }
+    .hero h1 { font-weight: 800; letter-spacing: -.035em; line-height: 1.02; font-size: clamp(2.6rem, 6vw, 4.3rem); }
+    .hero .lede { font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--ink-2); line-height: 1.55; max-width: 40rem; }
+    .grad-text { background: linear-gradient(90deg, var(--accent), var(--edu)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .cred-chip {
+      display: inline-flex; align-items: center; gap: .4rem; padding: .38rem .75rem; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--border); font-weight: 600; font-size: .85rem; color: var(--ink);
+    }
+    .cred-chip i { color: var(--accent); }
+    .avatar {
+      width: 64px; height: 64px; border-radius: 18px; flex: none;
+      background: linear-gradient(135deg, var(--accent), var(--edu)); color: #fff;
+      display: grid; place-items: center; font-weight: 800; font-size: 1.35rem; letter-spacing: -.02em;
+    }
+    .glance dt { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); font-weight: 600; margin-bottom: .15rem; }
+    .glance dd { margin-bottom: .9rem; font-weight: 500; }
+    .tldr li { padding-left: 1.6rem; position: relative; margin-bottom: .55rem; color: var(--ink-2); }
+    .tldr li i { position: absolute; left: 0; top: .1rem; color: var(--good); }
+
+    /* ---------- Sections ---------- */
+    section.block { padding: 72px 0; }
+    .eyebrow { font-size: .78rem; text-transform: uppercase; letter-spacing: .14em; font-weight: 700; color: var(--accent-ink); }
+    .section-title { font-weight: 800; letter-spacing: -.025em; font-size: clamp(1.8rem, 3.4vw, 2.5rem); }
+    .section-sub { color: var(--ink-2); max-width: 44rem; font-size: 1.05rem; }
+
+    /* ---------- KPI tiles ---------- */
+    .kpi { padding: 1.4rem 1.4rem 1.25rem; height: 100%; }
+    .kpi .num { font-size: clamp(2.1rem, 4vw, 2.75rem); font-weight: 800; letter-spacing: -.04em; line-height: 1; color: var(--ink); }
+    .kpi .lbl { font-weight: 600; margin-top: .55rem; }
+    .kpi .src { font-size: .82rem; color: var(--ink-3); margin-top: .2rem; }
+    .kpi .ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-ink); font-size: 1.15rem; }
+
+    /* ---------- Why me ---------- */
+    .why-card { padding: 1.5rem; height: 100%; }
+    .why-card .ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--surface-2); font-size: 1.25rem; color: var(--accent-ink); margin-bottom: 1rem; }
+    .why-card h3 { font-size: 1.1rem; font-weight: 700; }
+    .why-card p { color: var(--ink-2); margin: 0; }
+
+    /* ---------- Journey chart ---------- */
+    .journey { padding: 1.5rem; }
+    .legend-swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+    .tl-wrap { position: relative; }
+    .tl-axis, .tl-row { display: grid; grid-template-columns: 210px 1fr; align-items: center; column-gap: 16px; }
+    .tl-track { position: relative; height: 34px; }
+    .tl-axis .tl-track { height: 22px; }
+    .tl-year { position: absolute; top: 0; transform: translateX(-50%); font-size: .75rem; color: var(--ink-3); }
+    .tl-gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--grid); }
+    .tl-rows { position: relative; }
+    .tl-row { padding: 5px 0; }
+    .tl-label { font-weight: 600; font-size: .9rem; line-height: 1.25; }
+    .tl-label small { display: block; font-weight: 500; color: var(--ink-3); font-size: .78rem; }
+    .tl-bar {
+      position: absolute; top: 6px; height: 22px; border-radius: 4px; cursor: pointer;
+      border: 0; padding: 0 8px; color: #fff; font-size: .72rem; font-weight: 600;
+      display: flex; align-items: center; white-space: nowrap; overflow: hidden;
+      transition: filter .15s ease, opacity .15s ease;
+    }
+    .tl-bar.work { background: var(--work); }
+    .tl-bar.edu { background: var(--edu); }
+    .tl-rows.has-hover .tl-bar:not(.hot) { opacity: .4; }
+    .tl-bar:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .tl-today { position: absolute; top: -6px; bottom: -6px; width: 0; border-left: 2px dashed var(--ink-3); pointer-events: none; }
+    .tl-rows { margin-bottom: 22px; }
+    .tl-today span { position: absolute; bottom: -22px; left: 0; transform: translateX(-50%); font-size: .7rem; color: var(--ink-2); background: var(--surface); padding: 0 4px; white-space: nowrap; }
+    .tl-tip {
+      position: absolute; z-index: 5; pointer-events: none; min-width: 210px; max-width: 280px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow);
+      padding: .7rem .85rem; font-size: .85rem;
+    }
+    .tl-tip .k { color: var(--ink-3); }
+    @media (max-width: 767.98px) {
+      .tl-axis, .tl-row { grid-template-columns: 1fr; }
+      .tl-axis > div:first-child { display: none; }
+      .tl-row { padding: 6px 0 4px; }
+      .tl-label { margin-bottom: 2px; }
+      .tl-bar { font-size: 0; }
+      .tl-year { font-size: .68rem; }
+    }
+
+    /* ---------- Experience ---------- */
+    .exp-tabs .exp-tab {
+      width: 100%; text-align: left; border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+      border-radius: 14px; padding: .9rem 1rem; display: flex; gap: .85rem; align-items: center; margin-bottom: .6rem;
+      transition: border-color .15s ease, background .15s ease;
+    }
+    .exp-tabs .exp-tab:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--border)); }
+    .exp-tabs .exp-tab.active { border-color: var(--accent); background: var(--accent-soft); }
+    .org-logo { width: 42px; height: 42px; border-radius: 12px; flex: none; display: grid; place-items: center; font-weight: 800; font-size: .85rem; color: #fff; }
+    .exp-panel { padding: 1.75rem; }
+    .metric-badge { display: inline-flex; align-items: baseline; gap: .5rem; padding: .55rem .9rem; border-radius: 12px; background: var(--accent-soft); }
+    .metric-badge b { font-size: 1.35rem; color: var(--accent-ink); letter-spacing: -.02em; }
+    .metric-badge span { color: var(--ink-2); font-weight: 500; font-size: .9rem; }
+    .bullets li { margin-bottom: .6rem; color: var(--ink-2); padding-left: 1.5rem; position: relative; line-height: 1.55; }
+    .bullets li::before { content: ""; position: absolute; left: .25rem; top: .62rem; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
+    .bullets strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- Tags / chips ---------- */
+    .tag { display: inline-block; font-size: .76rem; font-weight: 600; padding: .25rem .6rem; border-radius: 8px; background: var(--surface-2); color: var(--ink-2); border: 1px solid var(--border); margin: 0 .3rem .35rem 0; }
+    .filter-pill { border: 1px solid var(--border); background: var(--surface); color: var(--ink-2); font-weight: 600; font-size: .88rem; border-radius: 999px; padding: .42rem 1rem; }
+    .filter-pill:hover { color: var(--ink); border-color: var(--ink-3); }
+    .filter-pill.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .filter-pill .count { opacity: .6; margin-left: .3rem; font-weight: 500; }
+    .search-box { position: relative; }
+    .search-box i { position: absolute; left: .9rem; top: 50%; transform: translateY(-50%); color: var(--ink-3); }
+    .search-box input { padding-left: 2.4rem; border-radius: 999px; background: var(--surface); border-color: var(--border); color: var(--ink); }
+    .search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 .2rem var(--accent-soft); }
+
+    /* ---------- Projects ---------- */
+    .proj { padding: 1.4rem; height: 100%; display: flex; flex-direction: column; }
+    .proj h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: .35rem; }
+    .proj .ctx { font-size: .8rem; color: var(--ink-3); font-weight: 600; }
+    .proj p { color: var(--ink-2); font-size: .95rem; flex-grow: 1; }
+    .cat-badge { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: .25rem .55rem; border-radius: 6px; }
+    .cat-Enterprise { background: rgba(42,120,214,.12); color: var(--accent-ink); }
+    .cat-Research { background: rgba(98,80,214,.13); color: #6250d6; }
+    .cat-IITMadras { background: rgba(235,104,52,.13); color: #b8481c; }
+    .cat-IITMandi { background: rgba(19,138,82,.13); color: #0f7a48; }
+    [data-bs-theme="dark"] .cat-Research { color: #a99ff0; }
+    [data-bs-theme="dark"] .cat-IITMadras { color: #f0915f; }
+    [data-bs-theme="dark"] .cat-IITMandi { color: #5fd29a; }
+    .proj-metric { font-size: .82rem; font-weight: 700; color: var(--good); }
+    .fade-list-enter-active, .fade-list-leave-active { transition: opacity .2s ease, transform .2s ease; }
+    .fade-list-enter-from, .fade-list-leave-to { opacity: 0; transform: translateY(6px); }
+
+    /* ---------- Skills ---------- */
+    .skill-group { padding: 1.3rem 1.4rem; height: 100%; }
+    .skill-group h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-3); font-weight: 700; margin-bottom: .8rem; }
+    .skill-chip {
+      display: inline-flex; align-items: center; gap: .35rem; border: 1px solid var(--border); background: var(--surface);
+      color: var(--ink); font-weight: 600; font-size: .86rem; padding: .36rem .75rem; border-radius: 10px; margin: 0 .35rem .45rem 0;
+      transition: all .15s ease;
+    }
+    .skill-chip:hover { border-color: var(--accent); }
+    .skill-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .skill-chip .dot { min-width: 18px; height: 18px; border-radius: 6px; font-size: .68rem; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-ink); padding: 0 4px; }
+    .skill-chip.active .dot { background: rgba(255,255,255,.25); color: #fff; }
+    .evidence { padding: 1.4rem; position: sticky; top: 92px; }
+    .evidence-item { padding: .75rem 0; border-top: 1px solid var(--border); }
+    .evidence-item:first-of-type { border-top: 0; }
+
+    /* ---------- Education ---------- */
+    .edu-card { padding: 1.5rem; height: 100%; position: relative; overflow: hidden; }
+    .edu-card .yr { font-size: .8rem; color: var(--ink-3); }
+    .edu-card h3 { font-size: 1.15rem; font-weight: 700; margin: .4rem 0 .2rem; }
+    .edu-card .deg { color: var(--ink-2); font-weight: 500; }
+    .edu-card .stripe { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--edu); }
+    .now-badge { font-size: .72rem; font-weight: 700; color: var(--good); background: color-mix(in srgb, var(--good) 14%, transparent); padding: .2rem .5rem; border-radius: 6px; }
+
+    /* ---------- Certs ---------- */
+    .cert { padding: 1rem 1.1rem; display: flex; gap: .9rem; align-items: center; height: 100%; }
+    .cert .ico { width: 42px; height: 42px; border-radius: 12px; flex: none; display: grid; place-items: center; font-size: 1.15rem; background: var(--surface-2); color: var(--accent-ink); }
+    .cert .t { font-weight: 700; font-size: .95rem; line-height: 1.3; }
+    .cert .s { font-size: .8rem; color: var(--ink-3); }
+
+    /* ---------- Contact ---------- */
+    .cta {
+      padding: clamp(1.75rem, 4vw, 3.25rem); border-radius: 24px; color: #fff; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #1d5fae 0%, #2a78d6 55%, #3f8ee6 100%);
+    }
+    .cta::after { content: ""; position: absolute; right: -80px; top: -80px; width: 280px; height: 280px; border-radius: 50%; background: rgba(255,255,255,.08); }
+    .cta h2 { font-weight: 800; letter-spacing: -.03em; font-size: clamp(1.9rem, 4vw, 2.8rem); }
+    .cta p { color: rgba(255,255,255,.85); font-size: 1.08rem; }
+    .contact-tile {
+      display: flex; align-items: center; gap: .85rem; padding: .9rem 1rem; border-radius: 14px; text-decoration: none;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22); color: #fff; transition: background .15s ease; height: 100%;
+      position: relative; z-index: 1;
+    }
+    .contact-tile:hover { background: rgba(255,255,255,.2); color: #fff; }
+    .contact-tile i { font-size: 1.3rem; }
+    .contact-tile small { display: block; color: rgba(255,255,255,.75); font-size: .75rem; }
+    .contact-tile span { font-weight: 600; word-break: break-all; }
+    .btn-white { background: #fff; color: #1d5fae; font-weight: 700; border: 0; }
+    .btn-white:hover { background: #eef4fc; color: #174c8c; }
+
+    footer { border-top: 1px solid var(--border); color: var(--ink-3); font-size: .9rem; }
+
+    /* ---------- Toast & reveal ---------- */
+    .copy-toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 2000;
+      background: var(--ink); color: var(--bg); padding: .6rem 1rem; border-radius: 10px; font-weight: 600; font-size: .9rem;
+      box-shadow: var(--shadow);
+    }
+    .toast-fade-enter-active, .toast-fade-leave-active { transition: opacity .2s ease, transform .2s ease; }
+    .toast-fade-enter-from, .toast-fade-leave-to { opacity: 0; transform: translate(-50%, 8px); }
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    .to-top { position: fixed; right: 18px; bottom: 18px; z-index: 1030; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .pulse { animation: none; }
+      .lift:hover { transform: none; }
+    }
+    @media (max-width: 575.98px) {
+      .hero { padding-top: 100px; }
+      section.block { padding: 56px 0; }
+      .container { padding-left: 16px; padding-right: 16px; }
+    }
+    @media print {
+      .site-nav, .to-top, .filter-row { display: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+<div id="app" v-cloak>
+
+  <!-- ================= NAV ================= -->
+  <nav class="navbar navbar-expand-lg fixed-top site-nav">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#top" style="color: var(--ink)">
+        <span class="brand-mark">AS</span>
+        <span>Anunay Sinha</span>
+      </a>
+      <div class="d-flex align-items-center gap-2 order-lg-3">
+        <button class="icon-btn" type="button" @click="toggleTheme" :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'">
+          <i :class="theme === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars'"></i>
+        </button>
+        <a class="btn btn-accent btn-sm px-3 py-2 d-none d-sm-inline-block rounded-3" :href="'mailto:' + profile.email + '?subject=' + encodeURIComponent('Opportunity for Anunay Sinha')">
+          <i class="bi bi-send me-1"></i> Hire me
+        </a>
+        <button class="navbar-toggler icon-btn border" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto gap-lg-1 py-2 py-lg-0">
+          <li class="nav-item" v-for="s in sections" :key="s.id">
+            <a class="nav-link" :class="{ active: activeSection === s.id }" :href="'#' + s.id" @click="closeNav">{{ s.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero" id="top">
+    <div class="container">
+      <div class="row g-4 g-xl-5 align-items-center">
+        <div class="col-lg-7">
+          <div class="status-pill mb-4"><span class="pulse"></span>{{ profile.status }}</div>
+          <h1 class="mb-3">Anunay Sinha.<br><span class="grad-text">Data Science &amp; AI</span><br>that ships.</h1>
+          <p class="lede mb-4">
+            I build machine-learning, NLP and AI-automation systems that run inside real enterprise software —
+            from SQL and feature engineering to the model, the API and the alert that reaches a human.
+            At Deloitte my log-intelligence system cut manual monitoring by <strong style="color: var(--ink)">90%</strong>.
+          </p>
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <span class="cred-chip" v-for="c in credentials" :key="c.label"><i :class="c.icon"></i>{{ c.label }}</span>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-accent btn-lg rounded-3 px-4" :href="'mailto:' + profile.email"><i class="bi bi-envelope me-2"></i>Email me</a>
+            <a class="btn btn-ghost btn-lg rounded-3" :href="profile.linkedin" target="_blank" rel="noopener"><i class="bi bi-linkedin me-2"></i>LinkedIn</a>
+            <a class="btn btn-ghost btn-lg rounded-3" :href="profile.github" target="_blank" rel="noopener"><i class="bi bi-github me-2"></i>GitHub</a>
+            <a v-if="profile.resumeUrl" class="btn btn-ghost btn-lg rounded-3" :href="profile.resumeUrl" target="_blank" rel="noopener"><i class="bi bi-file-earmark-arrow-down me-2"></i>Résumé</a>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="card-x p-4">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="avatar">AS</div>
+              <div>
+                <div class="fw-bold fs-5 lh-sm">Anunay Sinha</div>
+                <div class="text-2 small">Data Scientist · AI / ML Engineer</div>
+              </div>
+            </div>
+            <dl class="glance row g-0 mb-1">
+              <div class="col-6"><dt>Now</dt><dd>MBA, DS &amp; AI<br><span class="text-3 small">IIT Mandi · 2026–28</span></dd></div>
+              <div class="col-6"><dt>Most recent</dt><dd>Deloitte USI<br><span class="text-3 small">Software Dev · DS &amp; AI</span></dd></div>
+              <div class="col-6"><dt>Core stack</dt><dd>Python · SQL<br><span class="text-3 small">Scikit-learn · Flask</span></dd></div>
+              <div class="col-6"><dt>Open to</dt><dd>{{ profile.openTo }}</dd></div>
+            </dl>
+            <div class="eyebrow mb-2">The 30-second version</div>
+            <ul class="list-unstyled tldr mb-0">
+              <li><i class="bi bi-check-circle-fill"></i>Put Random Forest &amp; Logistic Regression models into production risk-scoring at Deloitte.</li>
+              <li><i class="bi bi-check-circle-fill"></i>Co-authored speech-synthesis research published at AIST 2023 (Samsung).</li>
+              <li><i class="bi bi-check-circle-fill"></i>Two IITs: engineering &amp; data science depth plus a management lens.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= IMPACT ================= -->
+  <section class="block pt-4" id="impact">
+    <div class="container">
+      <div class="row g-3 g-lg-4">
+        <div class="col-6 col-lg-4 col-xl-2" v-for="(k, i) in kpis" :key="k.label">
+          <div class="card-x kpi lift reveal" :style="{ transitionDelay: (i * 60) + 'ms' }" :data-count="i">
+            <div class="ico mb-3"><i :class="k.icon"></i></div>
+            <div class="num">{{ k.display }}</div>
+            <div class="lbl">{{ k.label }}</div>
+            <div class="src">{{ k.source }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WHY ME ================= -->
+  <section class="block" id="why">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow mb-2">Why hire me</div>
+        <h2 class="section-title mb-2">What I bring to your team</h2>
+        <p class="section-sub mb-4">Plenty of people can train a model in a notebook. I've spent my career getting models into software people depend on — and measuring whether they helped.</p>
+      </div>
+      <div class="row g-3 g-lg-4">
+        <div class="col-md-6 col-xl-3" v-for="w in whyMe" :key="w.title">
+          <div class="card-x why-card lift reveal">
+            <div class="ico"><i :class="w.icon"></i></div>
+            <h3>{{ w.title }}</h3>
+            <p>{{ w.text }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= JOURNEY ================= -->
+  <section class="block" id="journey">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow mb-2">Journey</div>
+        <h2 class="section-title mb-2">Learning and building in parallel</h2>
+        <p class="section-sub mb-4">Industry work at Samsung, DRDO and Deloitte ran alongside two degrees. Hover or tap a bar for details.</p>
+      </div>
+      <div class="card-x journey reveal">
+        <div class="d-flex flex-wrap gap-3 mb-4 small fw-semibold text-2">
+          <span class="d-inline-flex align-items-center gap-2"><span class="legend-swatch" style="background: var(--work)"></span>Work</span>
+          <span class="d-inline-flex align-items-center gap-2"><span class="legend-swatch" style="background: var(--edu)"></span>Education</span>
+          <span class="d-inline-flex align-items-center gap-2"><span style="width: 14px; border-top: 2px dashed var(--ink-3)"></span>Today</span>
+        </div>
+        <div class="tl-wrap" ref="tlWrap" @mouseleave="hideTip">
+          <div class="tl-axis mb-2">
+            <div></div>
+            <div class="tl-track">
+              <span class="tl-year mono" v-for="y in years" :key="y" :style="{ left: pct(y) + '%' }">{{ y }}</span>
+            </div>
+          </div>
+          <div class="tl-rows" :class="{ 'has-hover': tip.item }">
+            <div class="tl-row" v-for="t in timeline" :key="t.id">
+              <div class="tl-label">{{ t.name }}<small>{{ t.sub }}</small></div>
+              <div class="tl-track">
+                <span class="tl-gridline" v-for="y in years" :key="'g' + y" :style="{ left: pct(y) + '%' }"></span>
+                <button type="button" class="tl-bar" :class="[t.kind, { hot: tip.item && tip.item.id === t.id }]"
+                        :style="{ left: pct(t.start) + '%', width: (pct(t.end) - pct(t.start)) + '%' }"
+                        :aria-label="t.name + ', ' + t.sub + ', ' + t.period"
+                        @mouseenter="showTip(t, $event)" @mousemove="showTip(t, $event)"
+                        @focus="showTip(t, $event)" @blur="hideTip" @click="showTip(t, $event)">
+                  {{ t.period }}
+                </button>
+              </div>
+            </div>
+            <div class="tl-today-holder" style="position: absolute; inset: 0; pointer-events: none;">
+              <div class="tl-axis" style="height: 100%;">
+                <div></div>
+                <div style="position: relative; height: 100%;">
+                  <div class="tl-today" :style="{ left: pct(today) + '%' }"><span>Today</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tl-tip" v-if="tip.item" :style="{ left: tip.x + 'px', top: tip.y + 'px' }">
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <span class="legend-swatch" :style="{ background: tip.item.kind === 'work' ? 'var(--work)' : 'var(--edu)' }"></span>
+              <strong>{{ tip.item.name }}</strong>
+            </div>
+            <div class="text-2">{{ tip.item.sub }}</div>
+            <div class="mt-1"><span class="k">Period</span> <span class="mono">{{ tip.item.period }}</span></div>
+            <div class="mt-1 text-2" v-if="tip.item.note">{{ tip.item.note }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section class="block" id="experience">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow mb-2">Experience</div>
+        <h2 class="section-title mb-4">Where I've delivered</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="exp-tabs reveal" role="tablist">
+            <button v-for="e in experience" :key="e.id" type="button" role="tab" class="exp-tab"
+                    :class="{ active: activeExp === e.id }" :aria-selected="activeExp === e.id" @click="activeExp = e.id">
+              <span class="org-logo" :style="{ background: e.color }">{{ e.short }}</span>
+              <span class="flex-grow-1">
+                <span class="d-block fw-bold">{{ e.org }}</span>
+                <span class="d-block small text-2">{{ e.role }}</span>
+              </span>
+              <span class="mono small text-3 text-nowrap">{{ e.period }}</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card-x exp-panel" v-for="e in experience" v-show="activeExp === e.id" :key="'p' + e.id" role="tabpanel">
+            <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+              <div>
+                <h3 class="fw-bold mb-1" style="font-size: 1.45rem">{{ e.role }}</h3>
+                <div class="text-2 fw-semibold">{{ e.org }} <span class="text-3">·</span> <span class="mono small">{{ e.period }}</span></div>
+              </div>
+              <div class="metric-badge"><b>{{ e.metric.value }}</b><span>{{ e.metric.label }}</span></div>
+            </div>
+            <p class="text-2 mb-3">{{ e.summary }}</p>
+            <ul class="list-unstyled bullets mb-3">
+              <li v-for="(b, i) in e.bullets" :key="i" v-html="b"></li>
+            </ul>
+            <div><span class="tag" v-for="t in e.tags" :key="t">{{ t }}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section class="block" id="projects">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow mb-2">Projects</div>
+        <h2 class="section-title mb-2">Things I've built and analysed</h2>
+        <p class="section-sub mb-4">Enterprise systems, research, and academic work at IIT Madras and IIT Mandi. Filter by where the work happened or search by skill.</p>
+      </div>
+      <div class="d-flex flex-wrap align-items-center gap-2 mb-4 filter-row reveal">
+        <button v-for="c in projectCats" :key="c" type="button" class="filter-pill" :class="{ active: projFilter === c }" @click="projFilter = c">
+          {{ c }}<span class="count">{{ catCount(c) }}</span>
+        </button>
+        <div class="search-box ms-md-auto mt-2 mt-md-0" style="min-width: min(100%, 260px)">
+          <i class="bi bi-search"></i>
+          <input type="search" class="form-control" v-model="projQuery" placeholder="Search e.g. NLP, Redis, pricing" aria-label="Search projects">
+        </div>
+      </div>
+      <transition-group name="fade-list" tag="div" class="row g-3 g-lg-4">
+        <div class="col-md-6 col-xl-4" v-for="p in filteredProjects" :key="p.title">
+          <article class="card-x proj lift">
+            <div class="d-flex justify-content-between align-items-center mb-3 gap-2">
+              <span class="cat-badge" :class="'cat-' + p.cat.replace(/\s/g, '')">{{ p.cat }}</span>
+              <span class="proj-metric" v-if="p.metric"><i class="bi bi-graph-up-arrow me-1"></i>{{ p.metric }}</span>
+            </div>
+            <div class="ctx mb-1">{{ p.ctx }}</div>
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.desc }}</p>
+            <div><span class="tag" v-for="t in p.tags" :key="t">{{ t }}</span></div>
+          </article>
+        </div>
+      </transition-group>
+      <p v-if="!filteredProjects.length" class="text-2 text-center py-4">No projects match “{{ projQuery }}”. <a href="#" @click.prevent="projQuery = ''; projFilter = 'All'">Clear filters</a></p>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section class="block" id="skills">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow mb-2">Skills</div>
+        <h2 class="section-title mb-2">Skills, with receipts</h2>
+        <p class="section-sub mb-4">Click any skill to see exactly where I've used it. The number on each chip is how many roles, projects or certifications back it up.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="row g-3">
+            <div class="col-md-6" v-for="g in skillGroups" :key="g.name">
+              <div class="card-x skill-group reveal">
+                <h3><i :class="g.icon" class="me-2"></i>{{ g.name }}</h3>
+                <button v-for="s in g.skills" :key="s" type="button" class="skill-chip" :class="{ active: activeSkill === s }"
+                        :aria-pressed="activeSkill === s" @click="activeSkill = activeSkill === s ? null : s">
+                  {{ s }}<span class="dot" v-if="evidenceFor(s).length">{{ evidenceFor(s).length }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card-x evidence reveal" aria-live="polite">
+            <template v-if="activeSkill">
+              <div class="eyebrow mb-1">Evidence</div>
+              <h3 class="fw-bold mb-3" style="font-size: 1.3rem">{{ activeSkill }}</h3>
+              <div v-if="evidenceFor(activeSkill).length">
+                <div class="evidence-item" v-for="ev in evidenceFor(activeSkill)" :key="ev.title">
+                  <div class="small text-3 fw-semibold">{{ ev.type }}</div>
+                  <div class="fw-semibold">{{ ev.title }}</div>
+                </div>
+              </div>
+              <p v-else class="text-2 mb-0">Part of my working toolkit across development and deployment workflows.</p>
+              <button class="btn btn-ghost btn-sm mt-3 rounded-3" type="button" @click="activeSkill = null">Clear</button>
+            </template>
+            <template v-else>
+              <div class="eyebrow mb-1">Evidence</div>
+              <h3 class="fw-bold mb-2" style="font-size: 1.3rem">Pick a skill</h3>
+              <p class="text-2 mb-3">Every claim on this page links back to real work. Try one of these:</p>
+              <div>
+                <button v-for="s in ['Python', 'NLP', 'Scikit-learn', 'Generative AI']" :key="s" type="button" class="skill-chip" @click="activeSkill = s">{{ s }}</button>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EDUCATION ================= -->
+  <section class="block" id="education">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow mb-2">Education</div>
+        <h2 class="section-title mb-4">Engineering depth, management lens</h2>
+      </div>
+      <div class="row g-3 g-lg-4">
+        <div class="col-md-4" v-for="ed in education" :key="ed.school">
+          <div class="card-x edu-card lift reveal">
+            <span class="stripe"></span>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="yr mono">{{ ed.period }}</span>
+              <span class="now-badge" v-if="ed.now">Ongoing</span>
+            </div>
+            <h3>{{ ed.school }}</h3>
+            <div class="deg mb-3">{{ ed.degree }}</div>
+            <div class="d-flex align-items-baseline gap-2" v-if="ed.score">
+              <span class="fw-bold fs-4" style="letter-spacing: -.02em">{{ ed.score }}</span><span class="text-3 small">{{ ed.scoreLabel }}</span>
+            </div>
+            <p class="text-2 small mb-0">{{ ed.note }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CERTIFICATIONS ================= -->
+  <section class="block pt-2" id="certs">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow mb-2">Certifications &amp; recognition</div>
+        <h2 class="section-title mb-4">Verified, and recognised</h2>
+      </div>
+      <div class="row g-3">
+        <div class="col-sm-6 col-lg-4" v-for="c in certs" :key="c.title">
+          <div class="card-x cert lift reveal">
+            <div class="ico"><i :class="c.icon"></i></div>
+            <div>
+              <div class="t">{{ c.title }}</div>
+              <div class="s">{{ c.issuer }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="block" id="contact">
+    <div class="container">
+      <div class="cta reveal">
+        <div class="row g-4 align-items-center position-relative" style="z-index: 1">
+          <div class="col-lg-6">
+            <h2 class="mb-3">Let's build something that measurably works.</h2>
+            <p class="mb-4">Looking for someone who can own an ML problem end to end — data, model, API and the business case? I reply to every message.</p>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-white btn-lg rounded-3 px-4" :href="'mailto:' + profile.email + '?subject=' + encodeURIComponent('Opportunity for Anunay Sinha')"><i class="bi bi-send me-2"></i>Start a conversation</a>
+              <button class="btn btn-outline-light btn-lg rounded-3" type="button" @click="copyEmail"><i class="bi bi-clipboard me-2"></i>Copy email</button>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row g-2">
+              <div class="col-sm-6">
+                <a class="contact-tile" :href="'mailto:' + profile.email"><i class="bi bi-envelope"></i><div><small>Email</small><span>{{ profile.email }}</span></div></a>
+              </div>
+              <div class="col-sm-6" v-if="profile.phone">
+                <a class="contact-tile" :href="'tel:' + profile.phone.replace(/\s/g, '')"><i class="bi bi-telephone"></i><div><small>Phone</small><span>{{ profile.phone }}</span></div></a>
+              </div>
+              <div class="col-sm-6">
+                <a class="contact-tile" :href="profile.linkedin" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i><div><small>LinkedIn</small><span>Connect with me</span></div></a>
+              </div>
+              <div class="col-sm-6">
+                <a class="contact-tile" :href="profile.github" target="_blank" rel="noopener"><i class="bi bi-github"></i><div><small>GitHub</small><span>See my code</span></div></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-4">
+    <div class="container d-flex flex-wrap justify-content-between gap-2">
+      <span>© {{ year }} Anunay Sinha</span>
+      <span>Data Science &amp; AI · IIT Mandi · IIT Madras</span>
+    </div>
+  </footer>
+
+  <a href="#top" class="icon-btn to-top shadow-sm" v-show="scrolled" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
+
+  <transition name="toast-fade">
+    <div class="copy-toast" v-if="toast" role="status">{{ toast }}</div>
+  </transition>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/vue@3.4.38/dist/vue.global.prod.js"></script>
+<script>
+  // ======================================================================
+  //  EDIT ME — your public links. Replace the placeholder URLs below.
+  // ======================================================================
+  const PROFILE = {
+    email: 'anunay1.sinha@gmail.com',
+    phone: '+91 85958 11187',          // set to '' to hide your phone number
+    linkedin: 'https://www.linkedin.com/in/your-linkedin-handle/',
+    github: 'https://github.com/your-github-username',
+    resumeUrl: '',                       // e.g. 'Anunay_Sinha_Resume.pdf' (put the PDF next to index.html)
+    status: 'MBA (Data Science & AI) at IIT Mandi · open to opportunities',
+    openTo: 'DS, ML & AI Engineering roles'
+  };
+
+  const { createApp } = Vue;
+
+  createApp({
+    data() {
+      return {
+        profile: PROFILE,
+        theme: document.documentElement.getAttribute('data-bs-theme') || 'light',
+        year: new Date().getFullYear(),
+        scrolled: false,
+        activeSection: '',
+        toast: '',
+        sections: [
+          { id: 'impact', label: 'Impact' },
+          { id: 'why', label: 'Why me' },
+          { id: 'journey', label: 'Journey' },
+          { id: 'experience', label: 'Experience' },
+          { id: 'projects', label: 'Projects' },
+          { id: 'skills', label: 'Skills' },
+          { id: 'education', label: 'Education' },
+          { id: 'contact', label: 'Contact' }
+        ],
+        credentials: [
+          { label: 'IIT Mandi', icon: 'bi bi-mortarboard' },
+          { label: 'IIT Madras', icon: 'bi bi-mortarboard' },
+          { label: 'Deloitte USI', icon: 'bi bi-briefcase' },
+          { label: 'Samsung', icon: 'bi bi-cpu' },
+          { label: 'DRDO', icon: 'bi bi-shield-check' }
+        ],
+        kpis: [
+          { target: 90, suffix: '%', decimals: 0, label: 'less manual log monitoring', source: 'NLP log intelligence · Deloitte', icon: 'bi bi-lightning-charge' },
+          { target: 40, suffix: '%', decimals: 0, label: 'faster backend development', source: 'CRUD code generator · DRDO', icon: 'bi bi-speedometer2' },
+          { target: 1, suffix: '', decimals: 0, label: 'research paper published', source: 'AIST 2023 · Samsung', icon: 'bi bi-journal-text' },
+          { target: 3, suffix: '', decimals: 0, label: 'organisations shipped at', source: 'Deloitte · Samsung · DRDO', icon: 'bi bi-buildings' },
+          { target: 9.15, suffix: '', decimals: 2, label: 'B.Tech CGPA (of 10)', source: 'CSE (AI & ML)', icon: 'bi bi-award' },
+          { target: 6, suffix: '+', decimals: 0, label: 'certifications & awards', source: 'AWS · SAP · Oracle · NPTEL', icon: 'bi bi-patch-check' }
+        ].map(k => ({ ...k, display: k.decimals ? k.target.toFixed(k.decimals) : k.target + k.suffix })),
+        whyMe: [
+          { icon: 'bi bi-rocket-takeoff', title: 'Production ML, not just notebooks', text: 'I integrate models into Flask and Spring Boot services with validation, RBAC and async processing — so predictions reach users.' },
+          { icon: 'bi bi-diagram-3', title: 'The full data stack', text: 'SQL optimisation and PostgreSQL pipelines, feature engineering, model evaluation, REST APIs. I can own the whole path.' },
+          { icon: 'bi bi-lightbulb', title: 'Research depth', text: 'Deep-learning speech synthesis at Samsung (WaveNet, WaveGlow, Mel-spectrograms) that led to a paper at AIST 2023.' },
+          { icon: 'bi bi-graph-up', title: 'A business lens', text: 'An MBA in Data Science & AI at IIT Mandi: I frame models around risk, demand, capacity and service levels — the metrics leaders track.' }
+        ],
+        // Timeline (years; fractional = mid-year). Edit start/end to fine-tune.
+        today: 2026.8,
+        years: [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028],
+        timeline: [
+          { id: 'btech', kind: 'edu', name: 'C.V. Raman Global Univ.', sub: 'B.Tech, CSE (AI & ML)', period: '2020–2024', start: 2020, end: 2024, note: 'CGPA 9.15 / 10' },
+          { id: 'iitm', kind: 'edu', name: 'IIT Madras', sub: 'BS, Programming & Data Science', period: '2022–2026', start: 2022, end: 2026, note: 'Projects in app dev, ML and business data management' },
+          { id: 'samsung', kind: 'work', name: 'Samsung', sub: 'Machine Learning Engineer', period: '2022–2023', start: 2022, end: 2023, note: 'en-IN text-to-speech · AIST 2023 paper' },
+          { id: 'drdo', kind: 'work', name: 'DRDO', sub: 'Backend Developer', period: '2023', start: 2023, end: 2023.9, note: 'CRUD code generator · +40% productivity' },
+          { id: 'deloitte', kind: 'work', name: 'Deloitte USI', sub: 'Software Developer · DS & AI', period: '2024–2026', start: 2024, end: 2026, note: 'Risk scoring ML · NLP log intelligence (−90% manual effort)' },
+          { id: 'mba', kind: 'edu', name: 'IIT Mandi', sub: 'MBA, Data Science & AI', period: '2026–2028', start: 2026, end: 2028, note: 'Currently enrolled' }
+        ],
+        tip: { item: null, x: 0, y: 0 },
+        activeExp: 'deloitte',
+        experience: [
+          {
+            id: 'deloitte', org: 'Deloitte USI', short: 'D', color: '#0f7a48', role: 'Software Developer · Data Science & AI', period: '2024 – 2026',
+            metric: { value: '−90%', label: 'manual log monitoring' },
+            summary: 'Built enterprise AI for risk analytics and intelligent log monitoring, inside data-intensive backend services.',
+            bullets: [
+              'Developed <strong>Python/Flask services</strong> for risk scoring, vulnerability analytics, asset intelligence and enterprise data workflows.',
+              'Built <strong>ML-based vulnerability prioritisation</strong> using CVSS, exploit likelihood and asset criticality, integrating Random Forest and Logistic Regression models into enterprise applications.',
+              'Designed an <strong>NLP log-intelligence solution</strong> classifying Error, Warning and Info events with automated issue detection, alerts and unresolved-issue monitoring.',
+              '<strong>Reduced manual log-monitoring effort by 90%</strong> through automated classification, analysis and notification workflows.',
+              'Performed data preprocessing, validation, <strong>SQL optimisation</strong> and feature-oriented analysis across PostgreSQL-backed workflows.',
+              'Developed Python and <strong>Java Spring Boot</strong> services implementing business logic, RBAC, validation, asynchronous processing and data-intensive REST APIs.'
+            ],
+            tags: ['Python', 'Flask', 'Scikit-learn', 'Random Forest', 'Logistic Regression', 'NLP', 'SQL', 'PostgreSQL', 'Spring Boot', 'REST APIs', 'RBAC', 'Microservices']
+          },
+          {
+            id: 'samsung', org: 'Samsung', short: 'S', color: '#1428a0', role: 'Machine Learning Engineer', period: '2022 – 2023',
+            metric: { value: 'AIST 2023', label: 'published paper' },
+            summary: 'Deep-learning speech synthesis research for Indian-English voices.',
+            bullets: [
+              'Developed <strong>deep learning text-to-speech (TTS) models</strong> for en-IN voice optimisation using preprocessing, phoneme alignment, WaveNet/WaveGlow and Mel-spectrogram processing.',
+              'Contributed to research resulting in a <strong>paper published at AIST 2023</strong> on speech synthesis.'
+            ],
+            tags: ['Deep Learning', 'Python', 'TTS', 'WaveNet', 'WaveGlow', 'Mel-spectrograms', 'Phoneme alignment']
+          },
+          {
+            id: 'drdo', org: 'DRDO', short: 'DR', color: '#7a4b1d', role: 'Backend Developer', period: '2023',
+            metric: { value: '+40%', label: 'backend productivity' },
+            summary: 'Developer tooling that removed repetitive backend work.',
+            bullets: [
+              'Developed an <strong>automated CRUD API code-generation tool</strong> using reusable templates, improving backend development productivity by <strong>40%</strong>.'
+            ],
+            tags: ['REST APIs', 'Code generation', 'Templates', 'Backend']
+          }
+        ],
+        projFilter: 'All',
+        projQuery: '',
+        projects: [
+          { cat: 'Enterprise', ctx: 'Deloitte USI', title: 'ML Vulnerability Prioritisation', metric: '', desc: 'Ranks vulnerabilities by combining CVSS, exploit likelihood and asset criticality with Random Forest and Logistic Regression models, served inside enterprise risk applications.', tags: ['Scikit-learn', 'Random Forest', 'Logistic Regression', 'Python', 'Flask', 'PostgreSQL', 'Feature Engineering', 'ML Model Integration'] },
+          { cat: 'Enterprise', ctx: 'Deloitte USI', title: 'NLP Log Intelligence', metric: '−90% manual effort', desc: 'Classifies Error / Warning / Info events, detects issues automatically, raises alerts and tracks unresolved problems — replacing most manual log watching.', tags: ['NLP', 'Python', 'AI Workflows', 'Data Preprocessing', 'ML Model Integration'] },
+          { cat: 'Research', ctx: 'Samsung · AIST 2023', title: 'en-IN Neural Text-to-Speech', metric: 'Published', desc: 'Deep-learning TTS for Indian-English voices with phoneme alignment, WaveNet/WaveGlow vocoders and Mel-spectrogram processing.', tags: ['Deep Learning', 'Python', 'Data Preprocessing'] },
+          { cat: 'Enterprise', ctx: 'DRDO', title: 'CRUD API Code Generator', metric: '+40% productivity', desc: 'Template-driven tool that generates CRUD REST APIs automatically, cutting repetitive backend work.', tags: ['REST APIs', 'Backend'] },
+          { cat: 'IIT Madras', ctx: 'MAD 2 · Modern App Dev', title: 'Trekking Management Platform', metric: '', desc: 'Flask app with REST APIs, JWT auth and RBAC on PostgreSQL, using Redis and Celery for bookings, reminders, reports and async jobs.', tags: ['Flask', 'REST APIs', 'PostgreSQL', 'Redis', 'Celery', 'RBAC', 'Python'] },
+          { cat: 'IIT Madras', ctx: 'MAD 1 · Modern App Dev', title: 'QuizMaster', metric: '', desc: 'Interactive quiz-management app covering question creation, quiz workflows, scoring and result management.', tags: ['Python', 'Web App'] },
+          { cat: 'IIT Madras', ctx: 'MLP · ML Practice', title: 'Heavy Equipment Price Prediction', metric: '', desc: 'EDA, feature engineering and regression on high-dimensional transactional, categorical and technical data to predict equipment selling prices.', tags: ['Predictive Modeling', 'EDA', 'Feature Engineering', 'Model Evaluation', 'Python'] },
+          { cat: 'IIT Madras', ctx: 'BDM · Business Data Mgmt', title: 'House Rent Prediction', metric: '', desc: 'Combined property-level data with field surveys of stakeholders and customers to identify rental pricing drivers and support data-driven rent prediction.', tags: ['Statistical Analysis', 'Predictive Modeling', 'Primary research'] },
+          { cat: 'IIT Mandi', ctx: 'MBA · DS & Analytics', title: 'NexaCredit Growth', metric: '', desc: 'Python-based credit growth and portfolio analysis weighing growth opportunities against risk and review controls.', tags: ['Python', 'Statistical Analysis', 'Risk', 'Portfolio analysis'] },
+          { cat: 'IIT Mandi', ctx: 'MBA · DS & Analytics', title: 'VoltRoute Mobility', metric: '', desc: 'Mobility analysis of the evening-peak trade-off across demand, capacity and operational decisions.', tags: ['Python', 'EDA', 'Operations analytics'] },
+          { cat: 'IIT Mandi', ctx: 'MBA · DS & Analytics', title: 'QNow Market Commerce', metric: '', desc: 'Quick-commerce control-room analysis covering demand, inventory, fulfilment and service-level monitoring.', tags: ['Python', 'EDA', 'Operations analytics'] }
+        ],
+        activeSkill: null,
+        skillGroups: [
+          { name: 'Data Science', icon: 'bi bi-bar-chart-line', skills: ['Predictive Modeling', 'EDA', 'Feature Engineering', 'Model Evaluation', 'Statistical Analysis'] },
+          { name: 'AI / ML', icon: 'bi bi-cpu', skills: ['Python', 'Scikit-learn', 'NLP', 'Deep Learning', 'Generative AI', 'LLMs', 'RAG'] },
+          { name: 'Data', icon: 'bi bi-database', skills: ['SQL', 'PostgreSQL', 'MySQL', 'Redis', 'Data Preprocessing'] },
+          { name: 'Engineering', icon: 'bi bi-code-slash', skills: ['Flask', 'Spring Boot', 'REST APIs', 'Microservices', 'RBAC', 'Celery', 'React'] },
+          { name: 'AI Engineering', icon: 'bi bi-diagram-2', skills: ['ML Model Integration', 'AI Workflows', 'Prompt Engineering'] },
+          { name: 'Tools', icon: 'bi bi-tools', skills: ['Git', 'Docker', 'Kubernetes', 'CI/CD'] }
+        ],
+        education: [
+          { school: 'IIT Mandi', degree: 'MBA, Data Science & AI', period: '2026 – 2028', now: true, note: 'Management with data science & analytics: credit, mobility and quick-commerce case analyses.' },
+          { school: 'IIT Madras', degree: 'BS, Programming & Data Science', period: '2022 – 2026', note: 'Application development, machine learning practice and business data management.' },
+          { school: 'C.V. Raman Global University', degree: 'B.Tech, CSE (AI & ML)', period: '2020 – 2024', score: '9.15', scoreLabel: 'CGPA / 10', note: '' }
+        ],
+        certs: [
+          { title: 'AWS Certified AI Practitioner', issuer: 'Amazon Web Services', icon: 'bi bi-cloud-check', skills: ['Generative AI', 'LLMs', 'Prompt Engineering'] },
+          { title: 'Certified in Generative AI', issuer: 'SAP', icon: 'bi bi-stars', skills: ['Generative AI', 'LLMs', 'RAG', 'Prompt Engineering'] },
+          { title: 'OCI 2025 AI Foundations Associate', issuer: 'Oracle Cloud Infrastructure', icon: 'bi bi-cloud', skills: ['Generative AI', 'LLMs', 'Deep Learning'] },
+          { title: 'Machine Learning', issuer: 'NPTEL Certified', icon: 'bi bi-diagram-3', skills: ['Predictive Modeling', 'Model Evaluation', 'Statistical Analysis'] },
+          { title: 'Data Structures', issuer: 'NPTEL Certified', icon: 'bi bi-braces', skills: [] },
+          { title: 'Applause Award & Spot Award', issuer: 'Deloitte', icon: 'bi bi-trophy', skills: [] }
+        ]
+      };
+    },
+    computed: {
+      projectCats() { return ['All', 'Enterprise', 'Research', 'IIT Madras', 'IIT Mandi']; },
+      filteredProjects() {
+        const q = this.projQuery.trim().toLowerCase();
+        return this.projects.filter(p => {
+          if (this.projFilter !== 'All' && p.cat !== this.projFilter) return false;
+          if (!q) return true;
+          return [p.title, p.desc, p.ctx, p.cat, ...p.tags].join(' ').toLowerCase().includes(q);
+        });
+      },
+      evidenceIndex() {
+        // skill (lower-case) -> [{type, title}] from roles, projects and certs
+        const idx = {};
+        const add = (skill, ev) => {
+          const k = skill.toLowerCase();
+          (idx[k] = idx[k] || []);
+          if (!idx[k].some(e => e.title === ev.title)) idx[k].push(ev);
+        };
+        this.experience.forEach(e => e.tags.forEach(t => add(t, { type: 'Role', title: e.role + ' — ' + e.org })));
+        this.projects.forEach(p => p.tags.forEach(t => add(t, { type: 'Project · ' + p.ctx, title: p.title })));
+        this.certs.forEach(c => c.skills.forEach(t => add(t, { type: 'Certification · ' + c.issuer, title: c.title })));
+        return idx;
+      }
+    },
+    methods: {
+      pct(y) { return ((y - 2020) / 8) * 100; },
+      catCount(c) { return c === 'All' ? this.projects.length : this.projects.filter(p => p.cat === c).length; },
+      evidenceFor(s) { return this.evidenceIndex[s.toLowerCase()] || []; },
+      toggleTheme() {
+        this.theme = this.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-bs-theme', this.theme);
+        try { localStorage.setItem('as-theme', this.theme); } catch (e) {}
+      },
+      closeNav() {
+        const el = document.getElementById('mainNav');
+        if (el && el.classList.contains('show')) bootstrap.Collapse.getOrCreateInstance(el).hide();
+      },
+      showTip(item, evt) {
+        const wrap = this.$refs.tlWrap;
+        if (!wrap) return;
+        const box = wrap.getBoundingClientRect();
+        let cx, cy;
+        if (evt.clientX || evt.clientY) { cx = evt.clientX; cy = evt.clientY; }
+        else { const r = evt.target.getBoundingClientRect(); cx = r.left + r.width / 2; cy = r.top; }
+        const tipW = 260;
+        let x = cx - box.left + 14;
+        if (x + tipW > box.width) x = Math.max(0, cx - box.left - tipW - 14);
+        this.tip = { item, x, y: cy - box.top + 16 };
+      },
+      hideTip() { this.tip = { item: null, x: 0, y: 0 }; },
+      copyEmail() {
+        const done = () => { this.toast = 'Email copied — ' + this.profile.email; setTimeout(() => { this.toast = ''; }, 2200); };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(this.profile.email).then(done, () => this.fallbackCopy(done));
+        } else this.fallbackCopy(done);
+      },
+      fallbackCopy(done) {
+        const ta = document.createElement('textarea');
+        ta.value = this.profile.email; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta); done();
+      },
+      countUp(k) {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const fmt = v => (k.decimals ? v.toFixed(k.decimals) : Math.round(v)) + k.suffix;
+        if (reduce) { k.display = fmt(k.target); return; }
+        const t0 = performance.now(), dur = 1100;
+        const step = now => {
+          const p = Math.min(1, (now - t0) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          k.display = fmt(k.target * eased);
+          if (p < 1) requestAnimationFrame(step);
+        };
+        k.display = fmt(0);
+        requestAnimationFrame(step);
+      },
+      setupObservers() {
+        // Reveal-on-scroll + KPI count-up
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(en => {
+            if (!en.isIntersecting) return;
+            en.target.classList.add('in');
+            const i = en.target.dataset.count;
+            if (i !== undefined) this.countUp(this.kpis[+i]);
+            io.unobserve(en.target);
+          });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+        // Active nav link
+        const spy = new IntersectionObserver(entries => {
+          entries.forEach(en => { if (en.isIntersecting) this.activeSection = en.target.id; });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        this.sections.forEach(s => { const el = document.getElementById(s.id); if (el) spy.observe(el); });
+      }
+    },
+    mounted() {
+      this.$nextTick(this.setupObservers);
+      const onScroll = () => { this.scrolled = window.scrollY > 600; };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+  }).mount('#app');
+</script>
+</body>
+</html>
